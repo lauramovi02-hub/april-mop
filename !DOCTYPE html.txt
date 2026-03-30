@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>April Mop Mini Game</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #111, #333);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Section */
+.section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Button */
+.btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #ff4081;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #ff79a8;
+}
+
+/* Hidden */
+.hidden {
+    display: none;
+}
+
+/* Popup */
+#popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ffeb3b;
+    z-index: 999;
+    display: none;
+}
+
+/* Small bottom */
+.small-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: red;
+    top: -10px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- COVER -->
+<div class="section">
+    <h1>🎁🎉</h1>
+    <h2>KEMENTERIAN VAPE GIVEAWAY<br>DEVICE DAN LIQUID MOVI!!!</h2>
+    <button class="btn" onclick="step1()">Tap Here</button>
+</div>
+
+<!-- STEP 1 -->
+<div id="step1" class="section hidden">
+    <h1>✉️</h1>
+    <p>its special only for you</p>
+    <button class="btn" onclick="step2()">✨ Good Luck ✨</button>
+</div>
+
+<!-- SCROLL SECTION -->
+<div id="scrollSection" class="section hidden">
+    <p>Scroll ke bawah 👇</p>
+</div>
+
+<!-- BOTTOM -->
+<div class="section">
+    <button class="btn small-btn">Klik Here</button>
+</div>
+
+<!-- POPUP -->
+<div id="popup">
+    APRIL MOP 😂
+</div>
+
+<script>
+function step1() {
+    document.querySelector('.section').style.display = 'none';
+    document.getElementById('step1').classList.remove('hidden');
+}
+
+function step2() {
+    createConfetti();
+
+    setTimeout(() => {
+        document.getElementById('popup').style.display = 'flex';
+    }, 1000);
+
+    document.getElementById('scrollSection').classList.remove('hidden');
+}
+
+// Confetti generator
+function createConfetti() {
+    for (let i = 0; i < 80; i++) {
+        let confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor = randomColor();
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 5000);
+    }
+}
+
+function randomColor() {
+    const colors = ["#f44336","#e91e63","#9c27b0","#3f51b5","#03a9f4","#4caf50","#ffeb3b","#ff9800"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+</script>
+
+</body>
+</html>
